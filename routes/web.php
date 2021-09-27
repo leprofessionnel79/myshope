@@ -11,6 +11,27 @@
 |
 */
 
+use App\Image;
+use App\Product;
+use App\User;
+use Illuminate\Support\Facades\Route;
+
+
+Route::get('users', function () {
+    return User::paginate(15);
+});
+
+Route::get('products', function () {
+    return Product::paginate(200);
+});
+
+Route::get('images', function () {
+    return Image::paginate(200);
+});
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
