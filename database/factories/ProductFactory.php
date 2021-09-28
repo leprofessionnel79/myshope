@@ -12,5 +12,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'unit'=>$faker->randomElement(['kilo gram','quantity','meteres']),
         'price'=>$faker->randomFloat(2,10,500),
         'total'=>$faker->numberBetween(2,170),
+        'category_id'=>$faker->numberBetween(1,50),
     ];
 });
