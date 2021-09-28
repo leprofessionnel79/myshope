@@ -11,8 +11,12 @@
 |
 */
 
+use App\City;
+use App\Country;
 use App\Image;
 use App\Product;
+use App\State;
+use App\Unit;
 use App\User;
 use Illuminate\Support\Facades\Route;
 
@@ -21,17 +25,29 @@ Route::get('users', function () {
     return User::paginate(15);
 });
 
+Route::get('cities', function () {
+    return City::with(['country','state'])->paginate(4);
+});
+
 Route::get('products', function () {
-    return Product::paginate(200);
+    return Product::with(['images'])->paginate(200);
 });
 
 Route::get('images', function () {
-    return Image::paginate(200);
+    return Image::with(['product'])->paginate(200);
 });
 
-
+Route::get('test', function () {
+    return 'hello';
+})->middleware(['auth','Email_Verified']);
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
