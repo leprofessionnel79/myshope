@@ -49,6 +49,12 @@ Route::get('test', function () {
     return 'hello';
 })->middleware(['auth','User_Is_Admin']);
 
+Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
+
+    Route::get('add_unit','UnitController@showAdd')->name('new-unit');
+    Route::get('units','UnitController@index')->name('units');
+});
+
 
 Route::get('/', function () {
     return view('welcome');
