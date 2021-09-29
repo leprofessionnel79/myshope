@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+
+    
+
     protected $fillable=[
         'title','description','unit',
         'price','total'
@@ -22,4 +25,9 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
 }

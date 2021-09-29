@@ -16,13 +16,21 @@ use App\Country;
 use App\Image;
 use App\Product;
 use App\State;
+use App\Tag;
 use App\Unit;
 use App\User;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('users', function () {
-    return User::paginate(15);
+Route::get('tag_test', function () {
+    $tag=Tag::find(2);
+    return $tag->products;
+});
+
+Route::get('product_test', function () {
+
+    $product=Product::find(502);
+    return $product->tags;
 });
 
 Route::get('cities', function () {
