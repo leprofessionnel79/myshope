@@ -29,25 +29,25 @@ Route::get('tag_test', function () {
 
 Route::get('product_test', function () {
 
-    $product=Product::find(502);
+    $product=Product::find(1);
     return $product->tags;
 });
 
-Route::get('cities', function () {
-    return City::with(['country','state'])->paginate(4);
-});
+// Route::get('cities', function () {
+//     return City::with(['country','state'])->paginate(4);
+// });
 
-Route::get('products', function () {
-    return Product::with(['images'])->paginate(200);
-});
+// Route::get('products', function () {
+//     return Product::with(['images'])->paginate(200);
+// });
 
-Route::get('images', function () {
-    return Image::with(['product'])->paginate(200);
-});
+// Route::get('images', function () {
+//     return Image::with(['product'])->paginate(200);
+// });
 
 Route::get('test', function () {
     return 'hello';
-})->middleware(['auth','Email_Verified']);
+})->middleware(['auth','User_Is_Admin']);
 
 
 Route::get('/', function () {
