@@ -33,7 +33,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <a class="nav-link" href="{{ route('units') }}">{{ __('Unit') }}</a>
+                        <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
+                        <a class="nav-link" href="{{ route('tags') }}">{{ __('Tags') }}</a>
+                        <a class="nav-link" href="{{ route('categories') }}">{{ __('Categories') }}</a>
+                        <a class="nav-link" href="{{ route('countries') }}">{{ __('Countries') }}</a>
+                        <a class="nav-link" href="{{ route('cities') }}">{{ __('Cities') }}</a>
+                        <a class="nav-link" href="{{ route('states') }}">{{ __('States') }}</a>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
