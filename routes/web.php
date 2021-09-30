@@ -60,6 +60,9 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     //products
 
     Route::get('products','ProductController@index')->name('products');
+    //tags
+
+    Route::get('tags','TagController@index')->name('tags');
 });
 
 
