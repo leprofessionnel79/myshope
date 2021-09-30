@@ -51,7 +51,10 @@ Route::get('test', function () {
 
 Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
 
+    // units
+
     Route::get('add_unit','UnitController@showAdd')->name('new-unit');
+
     Route::get('units','UnitController@index')->name('units');
     //categories
 
@@ -63,6 +66,19 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     //tags
 
     Route::get('tags','TagController@index')->name('tags');
+
+    //orders
+    //payments
+    //shipments
+
+    //countries
+    Route::get('countries','CountryController@index')->name('countries');
+    //cities
+    Route::get('cities','CityController@index')->name('cities');
+
+    //states
+    Route::get('states','StateController@index')->name('states');
+
 });
 
 

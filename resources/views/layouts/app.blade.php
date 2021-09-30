@@ -76,6 +76,22 @@
                                      {{ __('Units') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('countries') }}">
+
+                                        {{ __('Countries') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('cities') }}">
+
+                                        {{ __('Cities') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('states') }}">
+
+                                        {{ __('States') }}
+                                    </a>
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
