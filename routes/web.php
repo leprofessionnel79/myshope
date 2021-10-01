@@ -65,6 +65,8 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     Route::get('products','ProductController@index')->name('products');
     //reviews
     Route::get('reviews','ReviewController@index')->name('reviews');
+    //tickets
+    Route::get('tickets','TicketController@index')->name('tickets');
     //tags
 
     Route::get('tags','TagController@index')->name('tags');
@@ -80,6 +82,8 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
 
     //states
     Route::get('states','StateController@index')->name('states');
+    //role
+    Route::get('roles','RoleController@index')->name('roles');
 
 });
 

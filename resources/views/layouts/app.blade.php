@@ -37,12 +37,13 @@
                         <a class="nav-link" href="{{ route('units') }}">{{ __('Unit') }}</a>
                         <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
                         <a class="nav-link" href="{{ route('reviews') }}">{{ __('Reviews') }}</a>
+                        <a class="nav-link" href="{{ route('tickets') }}">{{ __('Tickets') }}</a>
                         <a class="nav-link" href="{{ route('tags') }}">{{ __('Tags') }}</a>
                         <a class="nav-link" href="{{ route('categories') }}">{{ __('Categories') }}</a>
                         <a class="nav-link" href="{{ route('countries') }}">{{ __('Countries') }}</a>
                         <a class="nav-link" href="{{ route('cities') }}">{{ __('Cities') }}</a>
                         <a class="nav-link" href="{{ route('states') }}">{{ __('States') }}</a>
-
+                        <a class="nav-link" href="{{ route('roles') }}">{{ __('Roles') }}</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -78,6 +79,10 @@
 
                                         {{ __('Reviews') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('tickets') }}">
+
+                                        {{ __('Tickets') }}
+                                    </a>
 
                                     <a class="dropdown-item" href="{{ route('categories') }}">
 
@@ -102,6 +107,11 @@
                                     <a class="dropdown-item" href="{{ route('states') }}">
 
                                         {{ __('States') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('roles') }}">
+
+                                        {{ __('Roles') }}
                                     </a>
 
 
