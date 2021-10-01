@@ -56,6 +56,7 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     Route::get('add_unit','UnitController@showAdd')->name('new-unit');
 
     Route::get('units','UnitController@index')->name('units');
+    Route::post('units','UnitController@store');
     //categories
 
     Route::get('categories','CategoryController@index')->name('categories');
