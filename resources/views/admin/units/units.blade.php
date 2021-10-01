@@ -47,3 +47,14 @@
 </div>
 
 @endsection
+
+@section('scripts')
+<script>
+
+    jQuery(document).ready(function($){
+
+    alert('i am here');
+    });
+
+</script>
+@endsection
