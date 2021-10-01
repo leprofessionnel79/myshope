@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/497760f0f8.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -35,12 +36,13 @@
                     <ul class="navbar-nav mr-auto">
                         <a class="nav-link" href="{{ route('units') }}">{{ __('Unit') }}</a>
                         <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
+                        <a class="nav-link" href="{{ route('reviews') }}">{{ __('Reviews') }}</a>
                         <a class="nav-link" href="{{ route('tags') }}">{{ __('Tags') }}</a>
                         <a class="nav-link" href="{{ route('categories') }}">{{ __('Categories') }}</a>
                         <a class="nav-link" href="{{ route('countries') }}">{{ __('Countries') }}</a>
                         <a class="nav-link" href="{{ route('cities') }}">{{ __('Cities') }}</a>
                         <a class="nav-link" href="{{ route('states') }}">{{ __('States') }}</a>
-                        
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -71,6 +73,10 @@
                                     <a class="dropdown-item" href="{{ route('products') }}">
 
                                         {{ __('Products') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('reviews') }}">
+
+                                        {{ __('Reviews') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('categories') }}">
