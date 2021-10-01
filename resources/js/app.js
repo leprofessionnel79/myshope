@@ -6,9 +6,14 @@
 
 require('./bootstrap');
 
-// window.jQuery = window.$ = require('jquery/dist/jquery');
-global.$ = global.jQuery = require('jquery');
+//window.jQuery = window.$ = require('jquery/dist/jquery');
+global.$ = global.jQuery = require('jquery/dist/jquery');
 window.Vue = require('vue');
+
+jQuery(document).ready(function($){
+    alert('hi');
+    $('.toast').toast('show');
+});
 
 
 

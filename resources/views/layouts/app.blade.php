@@ -12,7 +12,7 @@
 
     <script src="https://kit.fontawesome.com/497760f0f8.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
-
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
 
@@ -144,6 +144,7 @@
 
 
     {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --}}
+
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
 </body>

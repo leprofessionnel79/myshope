@@ -2,6 +2,33 @@
 
 @section('content')
 
+@if (Session::has('message'))
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><i class="fa fa-check-circle ml-50"></i>Success  {{Session::get('message')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@endif
+
+
+
+
+
+
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -46,15 +73,46 @@
     </div>
 </div>
 
+
+{{-- <div class="toast" style="position: absolute; top: 10%; right: 10%;">
+    <div class="toast-header">
+
+    <strong class="mr-auto">Bootstrap</strong>
+
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="toast-body">
+    @if (Session::has('message'))
+
+        {{Session::get('message')}}
+
+    @endif
+    </div>
+</div> --}}
+
+
 @endsection
 
 @section('scripts')
-<script>
 
-    jQuery(document).ready(function($){
 
-    alert('i am here');
-    });
+            <script>
 
-</script>
+            jQuery(document).ready(function($){
+               // alert('hi');
+                // $('.toast').toast('show');
+            });
+
+            </script>
+
+
+
 @endsection
+
+
+
+
+
+
