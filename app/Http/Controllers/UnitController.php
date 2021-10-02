@@ -38,6 +38,14 @@ class UnitController extends Controller
 }
 
 public function delete(Request $request){
+    // $id =$request->input('unit_id');
+
+
+    if(is_null($request->input('unit_id')) || empty($request->input('unit_id'))){
+        return redirect()->back()->with([
+            'message'=>'Unit ID is Required'
+        ]);
+    }
     $id =$request->input('unit_id');
     Unit::destroy($id);
     return redirect()->back()->with([

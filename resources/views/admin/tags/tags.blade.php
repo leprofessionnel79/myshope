@@ -13,6 +13,8 @@
                     @foreach ($tags as $tag)
                     <div class="col-md-3">
                       <div class="alert alert-primary" role="alert">
+
+                        
                         <p>Tag :{{$tag->tag}} </p>
 
                       </div>
