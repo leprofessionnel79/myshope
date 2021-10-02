@@ -52,7 +52,10 @@
                       <div class="alert alert-primary" role="alert">
 
                             <span class="btn-span">
-                                <span><a  class="edit_unit" data-unitid="{{$unit->id}}"><i class="fas fa-edit"></i></a></span>
+                                <span><a  class="edit_unit" data-unitid="{{$unit->id}}"
+                                  data-unitname="{{$unit->unit_name}}"
+                                    data-unitcode="{{$unit->unit_code}}" ><i class="fas fa-edit"></i></a></span>
+
                                 <span><a  class="delete_unit" data-unitid="{{$unit->id}}" data-unitname="{{$unit->unit_name}}"
                                     data-unitcode="{{$unit->unit_code}}" ><i class="far fa-trash-alt"></i></a></span>
                             </span>
@@ -109,25 +112,47 @@
     </div>
   </div>
 
-  <div class="modal edit_window" tabindex="-1" role="dialog">
+  <div class="modal edit_window" tabindex="-1" role="dialog" id="edit-window">
+    <form action="{{route('units')}}" method="post" >
     <div class="modal-dialog" role="document">
+
       <div class="modal-content">
+
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">Update Unit</h5>
+
+            @csrf
+           <div class="form-group col-md-4" >
+               <label for="edit_unit_name">Unit Name</label>
+               <input type="text" class="form-control" id="edit_unit_name" name="unit_name" placeholder="Unit Name" required>
+             </div>
+             <div class="form-group col-md-4" >
+               <label for="edit_unit_code">Unit Code</label>
+               <input type="text" class="form-control" id="edit_unit_code" name="unit_code" placeholder="Unit Code" required>
+             </div>
+
+
+             <input type="hidden"  name="unit_id" value="" id="edit_unit_id">
+             <input type="hidden" name="_method" value="put">
+
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <p id="edit_message"></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+          <button type="submit" class="btn btn-primary">UPDATE</button>
         </div>
+
       </div>
+
     </div>
+</form>
   </div>
+
 
 
 @section('scripts')
@@ -138,7 +163,10 @@
               var $deleteUnit=$('.delete_unit');
               var $deleteWindow=$('#delete-window');
               var $unitId = $('#unit_id');
+              var $editunitId = $('#data-edit-unitid');
               var $deletemessage=$('#delete-message');
+
+
 
 
               $deleteUnit.on('click',function(element){
@@ -150,6 +178,30 @@
                $deletemessage.text('are you sure u want delete '+unit_name+' with code name '+unit_code+' ?');
                 $deleteWindow.modal('show');
               });
+
+              var $editmessage=$('#edit_message');
+              var $editWindow=$('#edit-window');
+              var $editUnit=$('.edit_unit');
+
+              var $editUnitName=$('#edit_unit_name');
+              var $editUnitCode=$('#edit_unit_code');
+              var $editUnitId=$('#edit_unit_id');
+
+              $editUnit.on('click',function(element){
+                element.preventDefault();
+              var unit_id = $(this).data('unitid');
+              var unit_name = $(this).data('unitname');
+              var unit_code = $(this).data('unitcode');
+
+              $editUnitName.val(unit_name);
+              $editUnitCode.val(unit_code);
+              $editUnitId.val(unit_id);
+
+              //$editunitId.val(unit_id);
+              //$editmessage.text('the unit '+$editUnitName+' with code name '+$editUnitCode+' has been updated');
+                $editWindow.modal('show');
+              });
+
 
             });
 

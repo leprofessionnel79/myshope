@@ -37,19 +37,39 @@ class UnitController extends Controller
     ]);
 }
 
-public function delete(Request $request){
-    // $id =$request->input('unit_id');
+    public function delete(Request $request){
+        // $id =$request->input('unit_id');
 
 
-    if(is_null($request->input('unit_id')) || empty($request->input('unit_id'))){
+        if(is_null($request->input('unit_id')) || empty($request->input('unit_id'))){
+            return redirect()->back()->with([
+                'message'=>'Unit ID is Required'
+            ]);
+        }
+        $id =$request->input('unit_id');
+        Unit::destroy($id);
         return redirect()->back()->with([
-            'message'=>'Unit ID is Required'
+            'message'=>'unit has been deleted'
         ]);
     }
-    $id =$request->input('unit_id');
-    Unit::destroy($id);
-    return redirect()->back()->with([
-        'message'=>'unit has been deleted'
-    ]);
-}
+
+    public function update (Request $request){
+
+        // dd($request);
+        $request->validate([
+           'unit_name'=>'required',
+           'unit_code'=>'required',
+           'unit_id'=>'required'
+        ]);
+        $unitid = intval($request->input('unit_id'));
+        $unit = Unit::find($unitid);
+
+        $unit->unit_name=$request->input('unit_name');
+        $unit->unit_code=$request->input('unit_code');
+
+        $unit->save();
+        return redirect()->back()->with([
+           'message'=>'Unit has been Updated successfully'
+        ]);
+    }
 }
