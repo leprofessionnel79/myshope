@@ -2,13 +2,13 @@
 
 @section('content')
 
-@if (Session::has('message'))
+@if (session()->has('message'))
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-5">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong><i class="fa fa-check-circle ml-50"></i>Success  {{Session::get('message')}}</strong>
+                <strong><i class="fa fa-check-circle ml-50"></i>    {{session()->get('message')}}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,12 +23,6 @@
 
 
 
-
-
-
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -36,7 +30,7 @@
                 <div class="card-header">Units</div>
 
                 <div class="card-body">
-                    <form action="" method="post" class="row">
+                    <form action="{{route('units')}}" method="post" class="row">
                          @csrf
                         <div class="form-group col-md-6" >
                             <label for="unit_name">Unit Name</label>
@@ -52,11 +46,23 @@
 
                     </form>
 
-
                   <div class="row">
                     @foreach ($units as $unit)
                     <div class="col-md-3">
                       <div class="alert alert-primary" role="alert">
+                          <span>
+                            <form action="{{route('units')}}" method="post">
+                              @csrf
+                              <input type="hidden" value="delete" name="_method">
+                              <input type="hidden"  name="unit_id" value="{{$unit->id}}">
+                              <button type="submit" class="delete-btn" style="appearance: none;
+                              background: none;
+                              color: red;
+                              position: absolute;
+                              right: 10px;
+                              border: none;"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                          </span>
                         <p>{{$unit->unit_name}}, {{$unit->unit_code}} </p>
 
                       </div>
@@ -73,43 +79,9 @@
     </div>
 </div>
 
-
-{{-- <div class="toast" style="position: absolute; top: 10%; right: 10%;">
-    <div class="toast-header">
-
-    <strong class="mr-auto">Bootstrap</strong>
-
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    <div class="toast-body">
-    @if (Session::has('message'))
-
-        {{Session::get('message')}}
-
-    @endif
-    </div>
-</div> --}}
-
-
 @endsection
 
-@section('scripts')
 
-
-            <script>
-
-            jQuery(document).ready(function($){
-               // alert('hi');
-                // $('.toast').toast('show');
-            });
-
-            </script>
-
-
-
-@endsection
 
 
 

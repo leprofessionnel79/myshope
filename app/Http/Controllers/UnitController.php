@@ -30,8 +30,18 @@ class UnitController extends Controller
 
     $unit->save();
 
-    Session::flash('message','unit '.$unit->unit_name.' has added');
+   // Session::flash('message','unit '.$unit->unit_name.' has added');
 
-    return redirect()->back();
+    return redirect()->back()->with([
+        'message'=>'unit '.$unit->unit_name.' has added'
+    ]);
+}
+
+public function delete(Request $request){
+    $id =$request->input('unit_id');
+    Unit::destroy($id);
+    return redirect()->back()->with([
+        'message'=>'unit has been deleted'
+    ]);
 }
 }

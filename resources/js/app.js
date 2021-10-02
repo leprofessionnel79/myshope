@@ -10,10 +10,7 @@ require('./bootstrap');
 global.$ = global.jQuery = require('jquery/dist/jquery');
 window.Vue = require('vue');
 
-jQuery(document).ready(function($){
-    alert('hi');
-    $('.toast').toast('show');
-});
+
 
 
 
