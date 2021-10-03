@@ -74,7 +74,7 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     //tags
 
     Route::get('tags','TagController@index')->name('tags');
-
+    Route::post('tags','TagController@store')->name('tags');
     //orders
     //payments
     //shipments

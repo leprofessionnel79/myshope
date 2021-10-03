@@ -13,4 +13,28 @@ class TagController extends Controller
             'tags'=>$tags,
         ]);
     }
+
+
+    public function store (Request $request){
+        $request->validate([
+           'tag'=>'required',
+        ]);
+        $tag = $request->input('tag');
+        $tags=Tag::where('tag','=',$tag)->get();
+
+        if(count($tags)>0){
+            return redirect()->back()->with([
+                'message'=>'tag  already exists'
+            ]);
+        }
+
+        $newTag=new Tag();
+        $newTag->tag=$request->input('tag');
+        $newTag->save();
+
+        return redirect()->back()->with([
+            'message'=>'tag '.$newTag->tag.' has been added '
+        ]);
+
+    }
 }
