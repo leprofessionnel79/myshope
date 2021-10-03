@@ -8,14 +8,56 @@ use Illuminate\Support\Facades\Session;
 
 class UnitController extends Controller
 {
+    public function search(Request $request){
+        $request->validate([
+            'search_units'=>'required'
+        ]);
+
+        $searchTerms = $request->input('search_units');
+
+        $units = Unit::where('unit_name','LIKE','%'.$searchTerms.'%')->orwhere(
+            'unit_code','LIKE','%'.$searchTerms.'%'
+        )->get();
+
+        if (count($units)>0){
+            return view('admin.units.units')->with([
+                'units'=>$units,
+                'showLinks'=>false
+            ]);
+        }
+
+    }
     public function showAdd(){
          return view('admin.units.add_edit');
     }
 
     public function index(){
         $units=Unit::paginate(16);
-        return view('admin.units.units')->with(['units'=>$units]);
+        return view('admin.units.units')->with([
+            'units'=>$units,
+            'showLinks'=>false
+        ]);
    }
+
+   private function unitNameExist($unitName){
+       $unit=Unit::where('unit_name','=',$unitName)->first();
+       if(!is_null($unit)){
+        Session::flash('message', 'The unit ('.$unitName.') already exist');
+        return false;
+       }
+
+       return true;
+   }
+
+   private function unitCodeExist($unitCode){
+    $unit=Unit::where('unit_code','=',$unitCode)->first();
+    if(!is_null($unit)){
+     Session::flash('message', 'The unit ('.$unitCode.') already exist');
+     return false;
+    }
+
+    return true;
+}
 
    public function store(Request $request){
 
@@ -23,6 +65,17 @@ class UnitController extends Controller
         'unit_name'=>'required',
         'unit_code'=>'required'
     ]);
+
+    $unitName = $request->input('unit_name');
+    $unitCode =  $request->input('unit_code');
+
+    if(! $this->unitNameExist($unitName)){
+           return redirect()->back();
+    }
+
+    if(! $this->unitCodeExist($unitCode)){
+        return redirect()->back();
+    }
 
     $unit=new Unit();
     $unit->unit_name=$request->input('unit_name');
@@ -61,6 +114,18 @@ class UnitController extends Controller
            'unit_code'=>'required',
            'unit_id'=>'required'
         ]);
+
+        $unitName = $request->input('unit_name');
+        $unitCode =  $request->input('unit_code');
+
+        if(! $this->unitNameExist($unitName)){
+               return redirect()->back();
+        }
+
+        if(! $this->unitCodeExist($unitCode)){
+            return redirect()->back();
+     }
+
         $unitid = intval($request->input('unit_id'));
         $unit = Unit::find($unitid);
 

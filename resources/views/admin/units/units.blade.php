@@ -75,7 +75,24 @@
                   @endforeach
                   </div>
 
-                  {{$units->links()}}
+                  {{-- {{$units->links()}} --}}
+
+                  {{(!is_null($showLinks)&& $showLinks) ? $units->links() :''}}
+
+                <form action="{{route('units-search')}}" method="post">
+                    @csrf
+                   <div class="row">
+
+                          <div class="form-group col-md-6" >
+                            <input type="text" class="form-control" id="search_units" name="search_units" placeholder="Search Units" required>
+                          </div>
+                          <div class="form-group col-md-6">
+                              <button class="btn btn-primary" type="submit">Search</button>
+                          </div>
+
+
+                  </div>
+                </form>
 
 
                 </div>
@@ -114,43 +131,45 @@
 
   <div class="modal edit_window" tabindex="-1" role="dialog" id="edit-window">
     <form action="{{route('units')}}" method="post" >
-    <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document">
 
-      <div class="modal-content">
+        <div class="modal-content">
 
-        <div class="modal-header">
-          <h5 class="modal-title">Update Unit</h5>
+            <div class="modal-header">
+            <h5 class="modal-title">Update Unit</h5>
 
-            @csrf
-           <div class="form-group col-md-4" >
-               <label for="edit_unit_name">Unit Name</label>
-               <input type="text" class="form-control" id="edit_unit_name" name="unit_name" placeholder="Unit Name" required>
-             </div>
-             <div class="form-group col-md-4" >
-               <label for="edit_unit_code">Unit Code</label>
-               <input type="text" class="form-control" id="edit_unit_code" name="unit_code" placeholder="Unit Code" required>
-             </div>
+                @csrf
+            <div class="form-group col-md-4" >
+                <label for="edit_unit_name">Unit Name</label>
+                <input type="text" class="form-control" id="edit_unit_name" name="unit_name" placeholder="Unit Name" required>
+                </div>
+                <div class="form-group col-md-4" >
+                <label for="edit_unit_code">Unit Code</label>
+                <input type="text" class="form-control" id="edit_unit_code" name="unit_code" placeholder="Unit Code" required>
+                </div>
 
 
-             <input type="hidden"  name="unit_id" value="" id="edit_unit_id">
-             <input type="hidden" name="_method" value="put">
+                <input type="hidden"  name="unit_id" value="" id="edit_unit_id">
+                <input type="hidden" name="_method" value="put">
 
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <p id="edit_message"></p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+            <button type="submit" class="btn btn-primary">UPDATE</button>
+            </div>
+
         </div>
-        <div class="modal-body">
-          <p id="edit_message"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-          <button type="submit" class="btn btn-primary">UPDATE</button>
+
+          </div>
+    </form>
         </div>
 
-      </div>
-
-    </div>
-</form>
   </div>
 
 

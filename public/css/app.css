@@ -10961,6 +10961,7 @@ a.text-dark:focus {
 span.btn-span {
   position: absolute;
   right: 15px;
+  bottom: 5px;
 }
 
 span.btn-span span:first-child {
