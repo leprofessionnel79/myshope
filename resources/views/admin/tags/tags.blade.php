@@ -34,7 +34,24 @@
                   @endforeach
                   </div>
 
-                  {{$tags->links()}}
+                  {{-- {{$tags->links()}} --}}
+
+                  {{ (!is_null($showLinks) && $showLinks) ? $tags->links():'' }}
+
+                  <form action="{{route('tags-search')}}" method="post">
+                      @csrf
+                     <div class="row">
+
+                            <div class="form-group col-md-6" >
+                              <input type="text" class="form-control" id="search_tags" name="search_tags" placeholder="Search Tags" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+
+
+                    </div>
+                  </form>
 
 
                 </div>

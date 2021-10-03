@@ -60,12 +60,6 @@
                                     data-unitcode="{{$unit->unit_code}}" ><i class="far fa-trash-alt"></i></a></span>
                             </span>
 
-                            {{-- <form action="{{route('units')}}" method="post">
-                                @csrf
-                                <input type="hidden" value="delete" name="_method">
-                                <input type="hidden"  name="unit_id" value="{{$unit->id}}">
-                                <button type="submit" class="delete-btn"><i class="fas fa-trash-alt"></i></button>
-                            </form> --}}
 
 
                         <p>{{$unit->unit_name}}, {{$unit->unit_code}} </p>

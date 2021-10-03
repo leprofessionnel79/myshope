@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller
 {
@@ -11,7 +12,40 @@ class TagController extends Controller
         $tags=Tag::paginate(env('NUMBER_OF_PAGES'));
         return view('admin.tags.tags')->with([
             'tags'=>$tags,
+            'showLinks'=>true,
         ]);
+    }
+
+    private function tagNotExists($tagname){
+        $tag=Tag::where('tag','=',$tagname)->first();
+        if(is_null($tag)){
+         Session::flash('message', 'The tag ('.$tagname.') dosnt exist');
+         return false;
+        }
+
+        return true;
+    }
+
+    public function search(Request $request){
+        $request->validate([
+            'search_tags'=>'required'
+        ]);
+
+        $searchTerms = $request->input('search_tags');
+
+        if(!$this->tagNotExists($searchTerms)){
+            return redirect()->back();
+        }
+
+        $tags = Tag::where('tag','LIKE','%'.$searchTerms.'%')->get();
+
+        if (count($tags)>0){
+            return view('admin.tags.tags')->with([
+                'tags'=>$tags,
+                'showLinks'=>false,
+            ]);
+        }
+
     }
 
 
