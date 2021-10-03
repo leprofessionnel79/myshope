@@ -22,7 +22,7 @@ class UnitController extends Controller
         if (count($units)>0){
             return view('admin.units.units')->with([
                 'units'=>$units,
-                'showLinks'=>false
+                'showLinks'=>false,
             ]);
         }
 
@@ -32,10 +32,11 @@ class UnitController extends Controller
     }
 
     public function index(){
-        $units=Unit::paginate(16);
+        $units=Unit::paginate(env('NUMBER_OF_PAGES'));
         return view('admin.units.units')->with([
+
             'units'=>$units,
-            'showLinks'=>false
+            'showLinks'=>true,
         ]);
    }
 

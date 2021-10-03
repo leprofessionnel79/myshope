@@ -77,7 +77,7 @@
 
                   {{-- {{$units->links()}} --}}
 
-                  {{(!is_null($showLinks)&& $showLinks) ? $units->links() :''}}
+                  {{ (!is_null($showLinks) && $showLinks) ? $units->links():'' }}
 
                 <form action="{{route('units-search')}}" method="post">
                     @csrf
