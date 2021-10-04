@@ -20,10 +20,10 @@ class TagController extends Controller
         $tag=Tag::where('tag','=',$tagname)->first();
         if(is_null($tag)){
          Session::flash('message', 'The tag ('.$tagname.') dosnt exist');
-         return false;
+         return true;
         }
 
-        return true;
+        return false;
     }
 
     public function search(Request $request){
@@ -33,11 +33,15 @@ class TagController extends Controller
 
         $searchTerms = $request->input('search_tags');
 
-        // if(!$this->tagNotExists($searchTerms)){
-        //     return redirect()->back();
-        // }
+        
 
         $tags = Tag::where('tag','LIKE','%'.$searchTerms.'%')->get();
+
+        if (count($tags)==0){
+            return redirect()->back()->with([
+                'message'=>'tag dosnt exist'
+            ]);
+        }
 
         if (count($tags)>0){
             return view('admin.tags.tags')->with([
@@ -84,7 +88,8 @@ class TagController extends Controller
         $id =$request->input('tag_id');
         Tag::destroy($id);
         return redirect()->back()->with([
-            'message'=>'tag has been deleted'
+            'message'=>'tag has been deleted',
+
         ]);
     }
 
@@ -97,14 +102,14 @@ class TagController extends Controller
         ]);
 
 
+        $tagTag = $request->input('tag_tag');
 
-
-        // if(! $this->tagNotExists($tagTag)){
+        // if($this->tagNotExists($tagTag)){
         //        return redirect()->back();
         // }
 
 
-        $tagTag = $request->input('tag_tag');
+
         $tagid = intval($request->input('tag_id'));
         $tag = Tag::find($tagid);
 

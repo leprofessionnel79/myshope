@@ -15,18 +15,16 @@ class UnitController extends Controller
 
         $searchTerms = $request->input('search_units');
 
-        // if(!$this->unitNameExist($searchTerms)){
-        //    return redirect()->back();
-        // }
-
-        // if(!$this->unitCodeExist($searchTerms)){
-        //     return redirect()->back();
-        //  }
-
-       // $allUnits = Unit::paginate(env('NUMBER_OF_PAGES'));
+        
         $units = Unit::where('unit_name','LIKE','%'.$searchTerms.'%')->orwhere(
             'unit_code','LIKE','%'.$searchTerms.'%'
         )->get();
+
+        if (count($units)==0){
+            return redirect()->back()->with([
+                'message'=>'unit dosnt exist'
+            ]);
+        }
 
         if (count($units)>0){
             return view('admin.units.units')->with([
@@ -34,16 +32,10 @@ class UnitController extends Controller
                 'showLinks'=>false,
             ]);
         }
-        // else{
-        //     Session::flash('message', 'This Unit dosnt exist');
-        //     return view('admin.units.units')->with([
-        //         'units'=>$allUnits,
-        //         'showLinks'=>true,
-
-        //     ]);
-        // }
 
     }
+
+
     public function showAdd(){
          return view('admin.units.add_edit');
     }
@@ -113,7 +105,7 @@ class UnitController extends Controller
         }
         $id =$request->input('unit_id');
         Unit::destroy($id);
-        
+
         return redirect()->back()->with([
             'message'=>'unit has been deleted'
         ]);
