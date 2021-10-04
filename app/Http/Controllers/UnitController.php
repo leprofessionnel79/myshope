@@ -15,13 +15,13 @@ class UnitController extends Controller
 
         $searchTerms = $request->input('search_units');
 
-        if(!$this->unitNameExist($searchTerms)){
-           return redirect()->back();
-        }
+        // if(!$this->unitNameExist($searchTerms)){
+        //    return redirect()->back();
+        // }
 
-        if(!$this->unitCodeExist($searchTerms)){
-            return redirect()->back();
-         }
+        // if(!$this->unitCodeExist($searchTerms)){
+        //     return redirect()->back();
+        //  }
 
        // $allUnits = Unit::paginate(env('NUMBER_OF_PAGES'));
         $units = Unit::where('unit_name','LIKE','%'.$searchTerms.'%')->orwhere(
@@ -87,13 +87,7 @@ class UnitController extends Controller
     $unitName = $request->input('unit_name');
     $unitCode =  $request->input('unit_code');
 
-    if(! $this->unitNameExist($unitName)){
-           return redirect()->back();
-    }
 
-    if(! $this->unitCodeExist($unitCode)){
-        return redirect()->back();
-    }
 
     $unit=new Unit();
     $unit->unit_name=$request->input('unit_name');
@@ -119,6 +113,7 @@ class UnitController extends Controller
         }
         $id =$request->input('unit_id');
         Unit::destroy($id);
+        
         return redirect()->back()->with([
             'message'=>'unit has been deleted'
         ]);
@@ -136,13 +131,13 @@ class UnitController extends Controller
         $unitName = $request->input('unit_name');
         $unitCode =  $request->input('unit_code');
 
-        if(! $this->unitNameExist($unitName)){
-               return redirect()->back();
-        }
+        // if( $this->unitNameExist($unitName)){
+        //        return redirect()->back();
+        // }
 
-        if(! $this->unitCodeExist($unitCode)){
-            return redirect()->back();
-     }
+        // if( $this->unitCodeExist($unitCode)){
+        //     return redirect()->back();
+        // }
 
         $unitid = intval($request->input('unit_id'));
         $unit = Unit::find($unitid);

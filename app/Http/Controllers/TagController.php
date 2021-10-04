@@ -33,9 +33,9 @@ class TagController extends Controller
 
         $searchTerms = $request->input('search_tags');
 
-        if(!$this->tagNotExists($searchTerms)){
-            return redirect()->back();
-        }
+        // if(!$this->tagNotExists($searchTerms)){
+        //     return redirect()->back();
+        // }
 
         $tags = Tag::where('tag','LIKE','%'.$searchTerms.'%')->get();
 
@@ -58,7 +58,7 @@ class TagController extends Controller
 
         if(count($tags)>0){
             return redirect()->back()->with([
-                'message'=>'tag  already exists'
+                'message'=>'tag name already exists'
             ]);
         }
 
@@ -93,18 +93,18 @@ class TagController extends Controller
         // dd($request);
         $request->validate([
            'tag_tag'=>'required',
-
+           'tag_id'=>'required'
         ]);
 
+
+
+
+        // if(! $this->tagNotExists($tagTag)){
+        //        return redirect()->back();
+        // }
+
+
         $tagTag = $request->input('tag_tag');
-
-
-        if( $this->tagNotExists($tagTag)){
-               return redirect()->back();
-        }
-
-
-
         $tagid = intval($request->input('tag_id'));
         $tag = Tag::find($tagid);
 
