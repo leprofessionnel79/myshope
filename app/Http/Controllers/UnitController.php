@@ -15,7 +15,7 @@ class UnitController extends Controller
 
         $searchTerms = $request->input('search_units');
 
-        
+
         $units = Unit::where('unit_name','LIKE','%'.$searchTerms.'%')->orwhere(
             'unit_code','LIKE','%'.$searchTerms.'%'
         )->get();
@@ -78,6 +78,16 @@ class UnitController extends Controller
 
     $unitName = $request->input('unit_name');
     $unitCode =  $request->input('unit_code');
+
+    $units = Unit::where('unit_name','LIKE','%'.$unitName.'%')->orwhere(
+        'unit_code','LIKE','%'.$unitCode.'%'
+    )->get();
+
+    if (count($units)>0){
+        return redirect()->back()->with([
+            'message'=>'unit already exists'
+        ]);
+    }
 
 
 
