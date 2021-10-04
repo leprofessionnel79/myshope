@@ -71,4 +71,49 @@ class TagController extends Controller
         ]);
 
     }
+
+    public function delete(Request $request){
+        // $id =$request->input('unit_id');
+
+
+        if(is_null($request->input('tag_id')) || empty($request->input('tag_id'))){
+            return redirect()->back()->with([
+                'message'=>'Tag ID is Required'
+            ]);
+        }
+        $id =$request->input('tag_id');
+        Tag::destroy($id);
+        return redirect()->back()->with([
+            'message'=>'tag has been deleted'
+        ]);
+    }
+
+    public function update (Request $request){
+
+        // dd($request);
+        $request->validate([
+           'tag_tag'=>'required',
+
+        ]);
+
+        $tagTag = $request->input('tag_tag');
+
+
+        if( $this->tagNotExists($tagTag)){
+               return redirect()->back();
+        }
+
+
+
+        $tagid = intval($request->input('tag_id'));
+        $tag = Tag::find($tagid);
+
+        $tag->tag=$request->input('tag_tag');
+
+
+        $tag->save();
+        return redirect()->back()->with([
+           'message'=>'Tag has been Updated successfully'
+        ]);
+    }
 }

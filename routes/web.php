@@ -76,6 +76,8 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     Route::get('tags','TagController@index')->name('tags');
     Route::post('tags','TagController@store')->name('tags');
     Route::post('tags-search','TagController@search')->name('tags-search');
+    Route::delete('tags','TagController@delete');
+    Route::put('tags','TagController@update');
     //orders
     //payments
     //shipments
