@@ -73,7 +73,7 @@
 
                   {{ (!is_null($showLinks) && $showLinks) ? $units->links():'' }}
 
-                <form action="{{route('units-search')}}" method="post">
+                <form action="{{route('units-search')}}" method="get">
                     @csrf
                    <div class="row">
 
@@ -132,12 +132,19 @@
                 <div class="modal-header">
                 <h5 class="modal-title">Update Unit</h5>
 
+
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
                     @csrf
-                <div class="form-group col-md-4" >
+                    <div class="form-group col-md-6" >
                     <label for="edit_unit_name">Unit Name</label>
                     <input type="text" class="form-control" id="edit_unit_name" name="unit_name" placeholder="Unit Name" required>
                     </div>
-                    <div class="form-group col-md-4" >
+                    <div class="form-group col-md-6" >
                     <label for="edit_unit_code">Unit Code</label>
                     <input type="text" class="form-control" id="edit_unit_code" name="unit_code" placeholder="Unit Code" required>
                     </div>
@@ -145,12 +152,6 @@
 
                     <input type="hidden"  name="unit_id" value="" id="edit_unit_id">
                     <input type="hidden" name="_method" value="put">
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
                 <p id="edit_message"></p>
                 </div>
                 <div class="modal-footer">

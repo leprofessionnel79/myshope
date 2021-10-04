@@ -45,7 +45,7 @@
 
                   {{ (!is_null($showLinks) && $showLinks) ? $tags->links():'' }}
 
-                  <form action="{{route('tags-search')}}" method="post">
+                  <form action="{{route('tags-search')}}" method="get">
                       @csrf
                      <div class="row">
 
@@ -124,20 +124,22 @@
             <div class="modal-header">
             <h5 class="modal-title">Update Tag</h5>
 
-                @csrf
-            <div class="form-group col-md-4" >
-                <label for="edit_unit_name">Tag Name</label>
-                <input type="text" class="form-control" id="edit_tag_tag" name="tag_tag" placeholder="Tag Name" required>
-                </div>
 
-                <input type="hidden"  name="tag_id" value="" id="edit_tag_id">
-                <input type="hidden" name="_method" value="put">
 
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
+
+                @csrf
+                <div class="form-group col-md-6 " >
+                <label for="edit_unit_name" >Tag Name</label>
+                <input type="text" class="form-control" id="edit_tag_tag" name="tag_tag" placeholder="Tag Name" required>
+                </div>
+
+                <input type="hidden"  name="tag_id" value="" id="edit_tag_id">
+                <input type="hidden" name="_method" value="put">
             <p id="edit_message"></p>
             </div>
             <div class="modal-footer">

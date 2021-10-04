@@ -15,6 +15,15 @@ class UnitController extends Controller
 
         $searchTerms = $request->input('search_units');
 
+        if(!$this->unitNameExist($searchTerms)){
+           return redirect()->back();
+        }
+
+        if(!$this->unitCodeExist($searchTerms)){
+            return redirect()->back();
+         }
+
+       // $allUnits = Unit::paginate(env('NUMBER_OF_PAGES'));
         $units = Unit::where('unit_name','LIKE','%'.$searchTerms.'%')->orwhere(
             'unit_code','LIKE','%'.$searchTerms.'%'
         )->get();
@@ -25,6 +34,14 @@ class UnitController extends Controller
                 'showLinks'=>false,
             ]);
         }
+        // else{
+        //     Session::flash('message', 'This Unit dosnt exist');
+        //     return view('admin.units.units')->with([
+        //         'units'=>$allUnits,
+        //         'showLinks'=>true,
+
+        //     ]);
+        // }
 
     }
     public function showAdd(){
@@ -42,8 +59,8 @@ class UnitController extends Controller
 
    private function unitNameExist($unitName){
        $unit=Unit::where('unit_name','=',$unitName)->first();
-       if(!is_null($unit)){
-        Session::flash('message', 'The unit ('.$unitName.') already exist');
+       if(is_null($unit)){
+        Session::flash('message', 'The unit ('.$unitName.') dosnt exist');
         return false;
        }
 
@@ -52,8 +69,8 @@ class UnitController extends Controller
 
    private function unitCodeExist($unitCode){
     $unit=Unit::where('unit_code','=',$unitCode)->first();
-    if(!is_null($unit)){
-     Session::flash('message', 'The unit ('.$unitCode.') already exist');
+    if(is_null($unit)){
+     Session::flash('message', 'The unit ('.$unitCode.') dosnt exist');
      return false;
     }
 

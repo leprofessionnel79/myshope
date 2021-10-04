@@ -59,7 +59,7 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     Route::post('units','UnitController@store');
     Route::delete('units','UnitController@delete');
     Route::put('units','UnitController@update');
-    Route::post('units-search','UnitController@search')->name('units-search');
+    Route::get('units-search','UnitController@search')->name('units-search');
     //categories
 
     Route::get('categories','CategoryController@index')->name('categories');
@@ -75,7 +75,7 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
 
     Route::get('tags','TagController@index')->name('tags');
     Route::post('tags','TagController@store')->name('tags');
-    Route::post('tags-search','TagController@search')->name('tags-search');
+    Route::get('tags-search','TagController@search')->name('tags-search');
     Route::delete('tags','TagController@delete');
     Route::put('tags','TagController@update');
     //orders
