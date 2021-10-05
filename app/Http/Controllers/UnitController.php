@@ -78,26 +78,12 @@ class UnitController extends Controller
 
     $unitName = $request->input('unit_name');
     $unitCode =  $request->input('unit_code');
-
-    $units = Unit::where('unit_name','LIKE','%'.$unitName.'%')->orwhere(
-        'unit_code','LIKE','%'.$unitCode.'%'
-    )->get();
-
-    if (count($units)>0){
-        return redirect()->back()->with([
-            'message'=>'unit already exists'
-        ]);
-    }
-
-
-
     $unit=new Unit();
     $unit->unit_name=$request->input('unit_name');
     $unit->unit_code=$request->input('unit_code');
 
     $unit->save();
 
-   // Session::flash('message','unit '.$unit->unit_name.' has added');
 
     return redirect()->back()->with([
         'message'=>'unit '.$unit->unit_name.' has added'
@@ -105,8 +91,6 @@ class UnitController extends Controller
 }
 
     public function delete(Request $request){
-        // $id =$request->input('unit_id');
-
 
         if(is_null($request->input('unit_id')) || empty($request->input('unit_id'))){
             return redirect()->back()->with([
@@ -115,6 +99,7 @@ class UnitController extends Controller
         }
         $id =$request->input('unit_id');
         Unit::destroy($id);
+
 
         return redirect()->back()->with([
             'message'=>'unit has been deleted'
@@ -133,13 +118,7 @@ class UnitController extends Controller
         $unitName = $request->input('unit_name');
         $unitCode =  $request->input('unit_code');
 
-        // if( $this->unitNameExist($unitName)){
-        //        return redirect()->back();
-        // }
 
-        // if( $this->unitCodeExist($unitCode)){
-        //     return redirect()->back();
-        // }
 
         $unitid = intval($request->input('unit_id'));
         $unit = Unit::find($unitid);
