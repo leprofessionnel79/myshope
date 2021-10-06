@@ -15,4 +15,15 @@ class ProductController extends Controller
             'currency'=>$currency,
         ]);
     }
+
+    public function newProduct($id=null){
+        $product=null;
+        if(!is_null($id)){
+            $product=Product::find($id);
+        }
+
+        return view('admin.products.new-product')->with([
+            'product'=>$product
+        ]);
+    }
 }

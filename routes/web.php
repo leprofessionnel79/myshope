@@ -67,6 +67,22 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     //products
 
     Route::get('products','ProductController@index')->name('products');
+
+    Route::get('new-product','ProductController@newProduct')->name('new-product');
+    Route::get('new-product/{id}','ProductController@newProduct')->name('update-product');
+
+    Route::post('new-product','ProductController@store');
+    Route::put('new-product/{id}','ProductController@update');
+
+    Route::delete('products','ProductController@delete');
+
+
+
+
+
+
+
+
     //reviews
     Route::get('reviews','ReviewController@index')->name('reviews');
     //tickets

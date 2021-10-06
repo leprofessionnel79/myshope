@@ -10979,6 +10979,12 @@ span.btn-span span:first-child {
   margin-right: 15px;
 }
 
+span.update-product {
+  font-weight: bold;
+  color: #0d70e2;
+  text-decoration: underline;
+}
+
 span.btn-span span:first-child a {
   color: #75e775;
 }
