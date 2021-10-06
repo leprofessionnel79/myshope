@@ -12,4 +12,13 @@ class Unit extends Model
     protected $fillable=['unit_code','unit_name'];
 
 
+    public function products (){
+        return $this->HasMany(Product::class,'unit','id');
+    }
+
+    public function formatted (){
+        return $this->unit_name.' - '.$this->unit_code;
+    }
 }
+
+

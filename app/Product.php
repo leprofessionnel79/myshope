@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
-    
+
 
     protected $fillable=[
         'title','description','unit',
@@ -30,4 +30,7 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function hasUnit(){
+        return $this->belongsTo(Unit::class,'unit','id');
+    }
 }
