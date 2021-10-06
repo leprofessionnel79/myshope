@@ -32,4 +32,8 @@ class ProductController extends Controller
             'categories'=>$categories
         ]);
     }
+
+    public function update(Request $request){
+          dd($request);
+    }
 }

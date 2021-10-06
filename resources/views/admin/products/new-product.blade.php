@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{route('new-product')}}" method="post" class="row">
+                    <form action="{{route('update-product')}}" method="post" class="row">
                        @csrf
 
                        @if (!is_null($product))
@@ -90,6 +90,7 @@
 
 
                        {{-- /options section --}}
+                       
                     </form>
                 </div>
             </div>
@@ -187,6 +188,7 @@
                         </td>
                         <td>
                             <a href="#" class="remove_option"><i class="fas fa-minus-circle"></i></a>
+                            <input type="hidden" name="`+$optionName.val()+`[]" value=" `+$optionOption.val()+`">
                         </td>
                </tr>
 
