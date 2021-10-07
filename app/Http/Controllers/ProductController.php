@@ -22,6 +22,7 @@ class ProductController extends Controller
         $product=null;
         if(!is_null($id)){
             $product=Product::with(['hasUnit'])->find($id);
+
         }
 
         $categories=Category::all();
@@ -43,7 +44,7 @@ class ProductController extends Controller
            'product_title'=>'required',
            'product_description'=>'required',
            'product_category'=>'required',
-           'prduct_unit'=>'required',
+           'product_unit'=>'required',
            'product_price'=>'required',
            'product_discount'=>'required',
            'product_total'=>'required',
@@ -56,7 +57,7 @@ class ProductController extends Controller
         $product->title=$request->input('product_title');
         $product->description=$request->input('product_description');
         $product->category_id=intval($request->input('product_category'));
-        $product->unit=intval($request->input('product_unit'));
+        $product->unit=$request->input('product_unit');
         $product->price=doubleval($request->input('product_price'));
         $product->discount=doubleval($request->input('product_discount'));
         $product->total=doubleval($request->input('product_total'));
@@ -82,6 +83,7 @@ class ProductController extends Controller
 
 
         $product->save();
+
         return redirect(route('products'));
   }
 }

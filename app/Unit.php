@@ -13,7 +13,7 @@ class Unit extends Model
 
 
     public function products (){
-        return $this->HasMany(Product::class,'unit','id');
+        return $this->HasMany(Product::class);
     }
 
     public function formatted (){

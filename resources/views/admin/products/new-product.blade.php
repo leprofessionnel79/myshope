@@ -50,7 +50,7 @@
 
                        <div class="form-group col-md-12" >
                             <label for="product_unit">Product Unit</label>
-                            <select name="prduct_unit" id="prduct_unit" class="form-control" required>
+                            <select name="product_unit" id="product_unit" class="form-control" required>
                                 <option>Select Unit</option>
                                 @foreach ($units as $unit )
 
