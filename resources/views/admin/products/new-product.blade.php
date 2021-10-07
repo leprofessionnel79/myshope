@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{route('update-product')}}" method="post" class="row">
+                    <form action="{{(!is_null($product))?route('update-product'):route('new-product')}}" method="post" class="row">
                        @csrf
 
                        @if (!is_null($product))
@@ -31,7 +31,7 @@
 
                        <div class="form-group col-md-12" >
                             <label for="product_title">Product Description</label>
-                            <textarea type="text" class="form-control" id="product_description" name="product_description"
+                            <textarea type="text" class="form-control" id="product_description" name="product_description" required
                             placeholder="product_description" requiredcols="30" rows="10">{{(!is_null($product))? $product->description:''}}</textarea>
                        </div>
 
@@ -63,19 +63,19 @@
 
                        <div class="form-group col-md-6" >
                         <label for="product_price">Product Price</label>
-                        <input type="number" class="form-control" id="product_price" name="product_price"  placeholder="Product Price" required
+                        <input type="number" class="form-control" id="product_price" name="product_price"  placeholder="Product Price" step="any" required
                         value="{{(!is_null($product))? $product->price:''}}" >
                        </div>
 
                        <div class="form-group col-md-6" >
                         <label for="product_discount">Product Discount</label>
-                        <input type="number" class="form-control" id="product_discount" name="product_discount"  placeholder="Product Discount" required
+                        <input type="number" class="form-control" id="product_discount" name="product_discount" step="any" placeholder="Product Discount" required
                         value="{{(!is_null($product))? $product->discount:'0'}}" >
                        </div>
 
                        <div class="form-group col-md-12" >
                         <label for="product_total">Product Total</label>
-                        <input type="number" class="form-control" id="product_total" name="product_total"  placeholder="Product Total" required
+                        <input type="number" class="form-control" id="product_total" name="product_total" step="any" placeholder="Product Total" required
                         value="{{(!is_null($product))? $product->total:''}}" >
                        </div>
 
@@ -90,7 +90,11 @@
 
 
                        {{-- /options section --}}
-                       
+
+                       <div class="form-group col-md-6 offset-md-3" >
+                          <button type="submit" class="btn btn-primary btn-block">SAVE</button>
+                       </div>
+
                     </form>
                 </div>
             </div>
@@ -129,7 +133,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-            <button type="submit" class="btn btn-primary " id="option-button">Add Option</button>
+            <button type="submit" class="btn btn-primary " id="option-button">ADD OPTION</button>
             </div>
 
         </div>
@@ -148,6 +152,8 @@
         //   alert('hi');
          var $optionWindow = $('#options_window');
          var $optionButton = $('#add-option');
+         var optionNamesList = [];
+         var optionNamesrow = '';
 
          $optionButton.on('click',function(e){
             e.preventDefault();
@@ -178,6 +184,12 @@
                 false;
             }
 
+            if(!optionNamesList.includes($optionName.val())){
+
+                optionNamesList.push($optionName.val());
+                optionNamesrow='<input type="hidden" name="options[]" value=" '+$optionName.val()+'">'
+            }
+
             var optionrow = `
                <tr>
                         <td>
@@ -195,6 +207,7 @@
             `;
 
             $table.append(optionrow);
+            $table.append(optionNamesrow);
             $optionOption.val('');
          });
       });

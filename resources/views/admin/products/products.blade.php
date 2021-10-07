@@ -18,7 +18,7 @@
                         <p>price : {{$currency}}{{$product->price}}</p>
                         {!!(count($product->images))>1?'<img class="img-thumbnail card-img" src="'.$product->images[0]->url.'"/>':''!!}
 
-                        <a href="{{route('update-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
+                        <a href="{{route('new-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
 
                       </div>
                     </div>
@@ -33,5 +33,39 @@
         </div>
     </div>
 </div>
+
+ <div class="toast" style="position: absolute; top: 10%; right: 10%;">
+    <div class="toast-header">
+
+      <strong class="mr-auto">Tag</strong>
+
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      @if (session()->has('message'))
+         {{session()->get('message')}}
+      @endif
+    </div>
+  </div>
+
+@endsection
+
+@section('scripts')
+
+        @if (session()->has("message"))
+
+            <script>
+                $(document).ready(function(){
+                    $toast = $('.toast').toast({
+                    autohide: false
+                    });
+
+                    $toast.toast('show');
+                });
+            </script>
+
+        @endif
 
 @endsection
