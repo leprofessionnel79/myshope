@@ -76,6 +76,16 @@ a.activate-image-upload:hover{
  color: rgb(41, 240, 107);
 }
 
+a.remove-image-upload i{
+    font-size: 2rem;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: rgb(236, 85, 85);
+    z-index: 99999;
+    //display: none;
+}
+
 input.file-image-upload{
     display: none;
 }

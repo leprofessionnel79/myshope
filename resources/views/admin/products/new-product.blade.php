@@ -100,6 +100,7 @@
                                     <div class="col-md-4 col-sm-12 mb-4">
 
                                         <div class="card card-image-upload" >
+                                            <a href="" class="remove-image-upload"><i class="fas fa-minus-circle"></i></a>
                                             <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}">
                                                 <div class="card-body" style="text-align: center">
                                                     <i class="fas fa-image"></i>
@@ -252,6 +253,13 @@
             }
         }
 
+        function resretUploadFile(fileUploadId,imageID,$ei,$ed){
+           $('#'+imageID).attr('src','');
+           $ei.fadeIn();
+           $ed.fadeOut();
+           $('#'+fileUploadId).val('');
+        }
+
          $activateImageUpload.on('click',function(e){
              e.preventDefault();
             var fileUploadId=$(this).data('fileid');
@@ -262,7 +270,14 @@
 
             $('#'+fileUploadId).on('change',function(e){
              readURL(this,'i'+fileUploadId);
-             me.find('i').remove();
+             me.find('i').fadeOut();
+             var $removeimage=me.parent().find('.remove-image-upload');
+             $removeimage.fadeIn();
+
+             $removeimage.on('click',function(e){
+                 e.preventDefault();
+                 resretUploadFile('#'+fileUploadId,'i'+fileUploadId,me.find('i'),$removeimage);
+             });
             });
          });
       });

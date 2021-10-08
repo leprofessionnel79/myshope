@@ -11002,6 +11002,15 @@ a.remove_option {
   color: #29f06b;
 }
 
+a.remove-image-upload i {
+  font-size: 2rem;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #ec5555;
+  z-index: 99999;
+}
+
 input.file-image-upload {
   display: none;
 }
