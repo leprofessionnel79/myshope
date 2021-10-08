@@ -19,8 +19,23 @@ class ProductController extends Controller
             'currency'=>$currency,
         ]);
 
-        // $product=Product::with(['images'])->find(500);
-        // return $product;
+    }
+
+    public function delete(Request $request){
+
+        if(is_null($request->input('product_id')) || empty($request->input('product_id'))){
+            return redirect()->back()->with([
+                'message'=>'Tag ID is Required'
+            ]);
+        }
+        $id =$request->input('product_id');
+        Product::destroy($id);
+
+        return back()->with([
+            'message'=>'product has been deleted',
+
+        ]);
+
     }
 
     public function newProduct($id=null){

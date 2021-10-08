@@ -88,7 +88,7 @@
 
 @endsection
 
-<div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
+  <div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

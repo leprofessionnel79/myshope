@@ -11002,6 +11002,14 @@ a.remove_option {
   color: #29f06b;
 }
 
+a.delete_product i {
+  position: absolute;
+  right: 33px;
+  bottom: 20px;
+  font-size: 25px;
+  color: #f36767;
+}
+
 a.remove-image-upload i {
   font-size: 2rem;
   position: absolute;

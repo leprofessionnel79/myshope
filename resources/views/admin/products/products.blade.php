@@ -38,7 +38,14 @@
 
 
 
-                        <a href="{{route('new-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
+                            <a href="{{route('new-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
+
+                            {{-- delete product  --}}
+                            <span><a  class="delete_product" data-productid="{{$product->id}}"
+                                ><i class="far fa-trash-alt"></i></a></span>
+
+
+
 
                       </div>
                     </div>
@@ -70,22 +77,81 @@
     </div>
   </div>
 
+
+  <div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    <form action="{{route('products')}}" method="post">
+            <div class="modal-body">
+            <p id="delete-message"> are you sure you want delete this product ?</p>
+
+                @csrf
+                <input type="hidden" value="delete" name="_method">
+                <input type="hidden"  name="product_id" value="" id="product_id">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+            <button type="submit" class="btn btn-primary">DELETE</button>
+            </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('scripts')
 
-        @if (session()->has("message"))
+    @if (session()->has("message"))
+        <script>
+            $(document).ready(function(){
+                
 
-            <script>
-                $(document).ready(function(){
-                    $toast = $('.toast').toast({
-                    autohide: false
+                $toast = $('.toast').toast({
+                autohide: false
+                });
+
+                $toast.toast('show');
+
                     });
 
-                    $toast.toast('show');
-                });
-            </script>
+        </script>
 
-        @endif
+
+
+    @endif
+
+    <script>
+        jQuery(document).ready(function(){
+
+         var $deleteProduct=$('.delete_product');
+         var $deleteWindow=$('#delete-window');
+         var $productId = $('#product_id');
+
+         $deleteProduct.on('click',function(element){
+                 element.preventDefault();
+             var product_id = $(this).data('productid');
+
+
+             $productId.val(product_id);
+             //$deletemessage.text('are you sure u want delete '+tag_tag+' ?');
+                 $deleteWindow.modal('show');
+
+        });
+     });
+
+     </script>
+
+
 
 @endsection
+
+
+
+
