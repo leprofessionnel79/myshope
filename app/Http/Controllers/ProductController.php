@@ -19,7 +19,7 @@ class ProductController extends Controller
             'currency'=>$currency,
         ]);
 
-        // $product=Product::with(['images'])->find(509);
+        // $product=Product::with(['images'])->find(500);
         // return $product;
     }
 
@@ -92,17 +92,27 @@ class ProductController extends Controller
         if($request->hasFile('product_images')){
             $images= $request->file('product_images');
 
-            foreach($images as $image){
+            // foreach($images as $image){
 
-                $path= $image->store('public');
+            //     $path= $image->store('public');
+            //     $image=new Image();
+            //     $image->url=$path;
+            //     $image->product_id=$product->id;
+            //     $image->save();
+            // }
+
+            foreach($images as $image){
+                $filename = time().'-'.$image->getClientOriginalName();
+                $image->move(public_path('images/'),$filename);
+
                 $image=new Image();
-                $image->url=$path;
+                $image->url=url('/').'/images/'.$filename;
                 $image->product_id=$product->id;
                 $image->save();
             }
         }
 
-        
+
 
         return redirect(route('products'));
   }
