@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Image;
 use App\Product;
 use App\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -16,6 +18,9 @@ class ProductController extends Controller
             'products'=>$products,
             'currency'=>$currency,
         ]);
+
+        // $product=Product::with(['images'])->find(509);
+        // return $product;
     }
 
     public function newProduct($id=null){
@@ -63,7 +68,7 @@ class ProductController extends Controller
         $product->total=doubleval($request->input('product_total'));
 
 
-        
+
 
         if($request->has('options')){
             $optionArray=[];
@@ -81,8 +86,23 @@ class ProductController extends Controller
 
 
 
-
+        Session::flash('message','product has been added');
         $product->save();
+
+        if($request->hasFile('product_images')){
+            $images= $request->file('product_images');
+
+            foreach($images as $image){
+
+                $path= $image->store('public');
+                $image=new Image();
+                $image->url=$path;
+                $image->product_id=$product->id;
+                $image->save();
+            }
+        }
+
+        
 
         return redirect(route('products'));
   }

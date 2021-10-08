@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{(!is_null($product))?route('update-product'):route('new-product')}}" method="post" class="row">
+                    <form action="{{(!is_null($product))?route('update-product'):route('new-product')}}" method="post" class="row" enctype="multipart/form-data">
                        @csrf
 
                        @if (!is_null($product))
@@ -91,6 +91,32 @@
 
                        {{-- /options section --}}
 
+                       {{-- images section  --}}
+
+                       <div class="form-group col-md-12" >
+
+                            <div class="row">
+                               @for ($i=0;$i<6;$i++)
+                                    <div class="col-md-4 col-sm-12 mb-4">
+
+                                        <div class="card card-image-upload" >
+                                            <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}">
+                                                <div class="card-body" style="text-align: center">
+
+                                                </div>
+                                            </a>
+                                            <input name="product_images[]" type="file" class="form-control-file file-image-upload" id="image-{{$i}}">
+                                        </div>
+
+
+                                    </div>
+                                @endfor
+                            </div>
+                       </div>
+
+
+                          {{-- /images section  --}}
+
                        <div class="form-group col-md-6 offset-md-3" >
                           <button type="submit" class="btn btn-primary btn-block">SAVE</button>
                        </div>
@@ -154,6 +180,7 @@
          var $optionButton = $('#add-option');
          var optionNamesList = [];
          var optionNamesrow = '';
+         var $activateImageUpload = $('.activate-image-upload');
 
          $optionButton.on('click',function(e){
             e.preventDefault();
@@ -209,6 +236,32 @@
             $table.append(optionrow);
             $table.append(optionNamesrow);
             $optionOption.val('');
+         });
+
+        function readURL(input , imageID) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                      $('#'+imageID).attr('src', e.target.result);
+                    // $(input).after($img);
+                    //console.log(e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+         $activateImageUpload.on('click',function(e){
+             e.preventDefault();
+            var fileUploadId=$(this).data('fileid');
+            $('#'+fileUploadId).trigger('click');
+            var imagetag = '<img id="i'+fileUploadId+'" src="" class="card-img-top">';
+            $(this).append(imagetag);
+
+            $('#'+fileUploadId).on('change',function(e){
+             readURL(this,'i'+fileUploadId);
+            });
          });
       });
    </script>

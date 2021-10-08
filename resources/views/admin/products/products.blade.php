@@ -18,6 +18,26 @@
                         <p>price : {{$currency}}{{$product->price}}</p>
                         {!!(count($product->images))>1?'<img class="img-thumbnail card-img" src="'.$product->images[0]->url.'"/>':''!!}
 
+
+                        {{-- @if (!is_null($product->options))
+
+                            @foreach ($product->JsonOptions() as $key => $values)
+                                <div class="form-group col-md-12" >
+                                    <label for="{{$key}}">{{$key}}</label>
+                                    <select  class="form-control" id="{{$key}}" name="{{$key}}"
+                                    value="{{$key}}" >
+                                        @foreach ($values as $value)
+                                            <option value="{{$value}}">{{$value}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            @endforeach
+
+                        @endif --}}
+
+
+
                         <a href="{{route('new-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
 
                       </div>

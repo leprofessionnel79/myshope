@@ -10997,3 +10997,7 @@ a.remove_option {
   color: #ee697a;
 }
 
+input.file-image-upload {
+  display: none;
+}
+
