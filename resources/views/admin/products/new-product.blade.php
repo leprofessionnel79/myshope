@@ -102,7 +102,7 @@
                                         <div class="card card-image-upload" >
                                             <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}">
                                                 <div class="card-body" style="text-align: center">
-
+                                                    <i class="fas fa-image"></i>
                                                 </div>
                                             </a>
                                             <input name="product_images[]" type="file" class="form-control-file file-image-upload" id="image-{{$i}}">
@@ -255,12 +255,14 @@
          $activateImageUpload.on('click',function(e){
              e.preventDefault();
             var fileUploadId=$(this).data('fileid');
+            var me=$(this);
             $('#'+fileUploadId).trigger('click');
             var imagetag = '<img id="i'+fileUploadId+'" src="" class="card-img-top">';
             $(this).append(imagetag);
 
             $('#'+fileUploadId).on('change',function(e){
              readURL(this,'i'+fileUploadId);
+             me.find('i').remove();
             });
          });
       });

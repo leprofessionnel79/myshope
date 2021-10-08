@@ -10997,6 +10997,11 @@ a.remove_option {
   color: #ee697a;
 }
 
+.card-image-upload i {
+  font-size: 6rem;
+  color: #29f06b;
+}
+
 input.file-image-upload {
   display: none;
 }
