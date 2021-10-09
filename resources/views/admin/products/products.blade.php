@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Products  <a href="{{route('new-product')}}"><i class="fas fa-plus-circle"></i></a></div>
+                <div class="card-header">Products  <a href="{{route('new-product')}}" class="new-product"><i title="ADD PRODUCT" class="fas fa-plus-circle"></i></a></div>
 
                 <div class="card-body">
                   <div class="row">
@@ -41,8 +41,8 @@
                             <a href="{{route('new-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
 
                             {{-- delete product  --}}
-                            <span><a  class="delete_product" data-productid="{{$product->id}}"
-                                ><i class="far fa-trash-alt"></i></a></span>
+                            <span><a href="#" class="delete_product" data-productid="{{$product->id}}"
+                                ><i title="DELETE PRODUCT" class="far fa-trash-alt"></i></a></span>
 
 
 
@@ -111,7 +111,7 @@
     @if (session()->has("message"))
         <script>
             $(document).ready(function(){
-                
+
 
                 $toast = $('.toast').toast({
                 autohide: false

@@ -25,7 +25,7 @@ class ProductController extends Controller
 
         if(is_null($request->input('product_id')) || empty($request->input('product_id'))){
             return redirect()->back()->with([
-                'message'=>'Tag ID is Required'
+                'message'=>'Product ID is Required'
             ]);
         }
         $id =$request->input('product_id');

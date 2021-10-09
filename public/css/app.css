@@ -10958,6 +10958,16 @@ a.text-dark:focus {
   border: none;
 }
 
+a.new-product i {
+  font-size: 25px;
+  position: absolute;
+  left: 100px;
+}
+
+a.delete_product i:hover {
+  color: #d80c10;
+}
+
 .navbar-light .navbar-nav .nav-link:focus,
 .navbar-light .navbar-nav .nav-link:hover {
   color: rgba(9, 136, 240, 0.7) !important;
@@ -11004,9 +11014,9 @@ a.remove_option {
 
 a.delete_product i {
   position: absolute;
-  right: 33px;
-  bottom: 20px;
-  font-size: 25px;
+  right: 23px;
+  bottom: 16px;
+  font-size: 30px;
   color: #f36767;
 }
 
