@@ -77,9 +77,9 @@ a.activate-image-upload{
 a.activate-image-upload:hover{
 
    }
-.card-image-upload i{
+.card-image-upload .card-body i{
  font-size: 6rem;
- color: rgb(41, 240, 107);
+ color: rgb(30, 187, 82);
 }
 
 a.delete_product i{
@@ -90,14 +90,14 @@ a.delete_product i{
     color: rgb(243, 103, 103);
 }
 
-a.remove-image-upload i{
+.card-image-upload a.remove-image-upload {
     font-size: 2rem;
     position: absolute;
-    top: 5px;
+    top: 0px;
     right: 5px;
     color: rgb(236, 85, 85);
     z-index: 99999;
-    //display: none;
+    display: none;
 }
 
 input.file-image-upload{

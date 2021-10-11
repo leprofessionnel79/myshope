@@ -29,6 +29,7 @@ class ProductController extends Controller
             ]);
         }
         $id =$request->input('product_id');
+
         Product::destroy($id);
 
         return back()->with([
@@ -116,15 +117,17 @@ class ProductController extends Controller
                 $image->save();
 
 
-                // foreach($images as $image){
+            //     foreach($images as $image){
 
             //     $path= $image->store('public');
+
             //     $image=new Image();
-            //     $image->url=$path;
+            //     $image->url=url('/').$path;
+            //     dd($image->url);
             //     $image->product_id=$product->id;
             //     $image->save();
             // }
-            }
+           }
         }
 
 

@@ -11007,9 +11007,9 @@ a.remove_option {
   color: #ee697a;
 }
 
-.card-image-upload i {
+.card-image-upload .card-body i {
   font-size: 6rem;
-  color: #29f06b;
+  color: #1ebb52;
 }
 
 a.delete_product i {
@@ -11020,13 +11020,14 @@ a.delete_product i {
   color: #f36767;
 }
 
-a.remove-image-upload i {
+.card-image-upload a.remove-image-upload {
   font-size: 2rem;
   position: absolute;
-  top: 5px;
+  top: 0px;
   right: 5px;
   color: #ec5555;
   z-index: 99999;
+  display: none;
 }
 
 input.file-image-upload {

@@ -64,7 +64,7 @@
  <div class="toast" style="position: absolute; top: 10%; right: 10%;">
     <div class="toast-header">
 
-      <strong class="mr-auto">Tag</strong>
+      <strong class="mr-auto">Products</strong>
 
       <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
         <span aria-hidden="true">&times;</span>
