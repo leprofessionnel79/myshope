@@ -84,6 +84,35 @@
                        <div class="form-group col-md-12" >
                             <table class="table table-striped" id="option-table">
 
+                                @if (!is_null($product))
+
+                                  @if (!is_null($product->JsonOptions()))
+
+                                    @foreach ($product->JsonOptions() as $optionNames => $options)
+
+                                       @foreach ($options as $option)
+
+                                            <tr>
+                                                    <td>
+                                                    {{$optionNames}}
+                                                    </td>
+                                                    <td>
+                                                    {{ $option}}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" class="remove_option"><i class="fas fa-minus-circle"></i></a>
+                                                        <input type="hidden" name="{{$optionNames}}[]" value=" {{$option}}">
+                                                    </td>
+                                            </tr>
+                                       @endforeach
+                                       <td><input type="hidden" name="options[]" value="{{$optionNames}}"> </td>
+
+                                    @endforeach
+
+                                  @endif
+
+                                @endif
+
                             </table>
                             <a href="#" class="btn btn-primary" id="add-option"> Add Option</a>
                        </div>
@@ -174,12 +203,28 @@
 
 @section('scripts')
 
+    <script>
+    var optionNamesList = [];
+    </script>
+
+    @if (!is_null($product))
+
+      @if (!is_null($product->JsonOptions()))
+
+         @foreach ($product->JsonOptions() as $optionNames => $options)
+             <script>optionNamesList.push('{{$optionNames}}');</script>
+         @endforeach
+
+      @endif
+
+    @endif
+
    <script>
       jQuery(document).ready(function(){
         //   alert('hi');
          var $optionWindow = $('#options_window');
          var $optionButton = $('#add-option');
-         var optionNamesList = [];
+
          var optionNamesrow = '';
          var $activateImageUpload = $('.activate-image-upload');
 
