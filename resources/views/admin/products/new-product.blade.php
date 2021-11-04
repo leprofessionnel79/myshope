@@ -131,8 +131,24 @@
                                         <div class="card card-image-upload" >
                                             <a href="" class="remove-image-upload"><i class="fas fa-minus-circle"></i></a>
                                             <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}">
+                                                @if (!is_null($product->images)&& count($product->images)>0)
+                                                  @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
+                                                  <img id="{{'iimage-'.$i}}" src="{{asset($product->images[$i]->url)}}" class="card-img-top">
+
+                                                  @endif
+
+                                                @endif
                                                 <div class="card-body" style="text-align: center">
-                                                    <i class="fas fa-image"></i>
+                                                @if (!is_null($product->images)&& count($product->images)>0)
+                                                        @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
+
+                                                        @else
+                                                        <i class="fas fa-image"></i>
+
+                                                        @endif
+
+                                                @endif
+
                                                 </div>
                                             </a>
                                             <input name="product_images[]" type="file" class="form-control-file file-image-upload" id="image-{{$i}}">
