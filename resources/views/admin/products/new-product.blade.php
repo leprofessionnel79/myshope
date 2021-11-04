@@ -129,7 +129,15 @@
                                     <div class="col-md-4 col-sm-12 mb-4">
 
                                         <div class="card card-image-upload" >
-                                            <a href="" class="remove-image-upload"><i class="fas fa-minus-circle"></i></a>
+                                            @if (!is_null($product->images)&& count($product->images)>0)
+                                                @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
+                                                <a href="" class="remove-image-upload" ><i class="fas fa-minus-circle"></i></a>
+                                                @else
+                                                <a href="" class="remove-image-upload" style="display: none"><i class="fas fa-minus-circle"></i></a>
+                                                @endif
+
+                                            @endif
+                                            {{-- <a href="" class="remove-image-upload"><i class="fas fa-minus-circle"></i></a> --}}
                                             <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}">
                                                 @if (!is_null($product->images)&& count($product->images)>0)
                                                   @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))

@@ -11027,7 +11027,6 @@ a.delete_product i {
   right: 5px;
   color: #ec5555;
   z-index: 99999;
-  display: none;
 }
 
 input.file-image-upload {
