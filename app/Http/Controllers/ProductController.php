@@ -55,26 +55,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request){
-          //dd($request);
-    }
+    private function writeProduct(Request $request,Product $product){
 
-    public function store(Request $request){
-        //dd($request);
-        $request->validate([
-           'product_title'=>'required',
-           'product_description'=>'required',
-           'product_category'=>'required',
-           'product_unit'=>'required',
-           'product_price'=>'required',
-           'product_discount'=>'required',
-           'product_total'=>'required',
-
-        ]);
-
-
-
-        $product=new Product();
         $product->title=$request->input('product_title');
         $product->description=$request->input('product_description');
         $product->category_id=intval($request->input('product_category'));
@@ -101,8 +83,6 @@ class ProductController extends Controller
         }
 
 
-
-        Session::flash('message','product has been added');
         $product->save();
 
         if($request->hasFile('product_images')){
@@ -132,6 +112,49 @@ class ProductController extends Controller
 
 
 
+        return $product;
+
+    }
+
+    public function update(Request $request){
+        $request->validate([
+            'product_title'=>'required',
+            'product_description'=>'required',
+            'product_category'=>'required',
+            'product_unit'=>'required',
+            'product_price'=>'required',
+            'product_discount'=>'required',
+            'product_total'=>'required',
+
+         ]);
+
+
+         $productID = $request->input("prduct_id");
+         $product=Product::find($productID);
+        
+         $this->writeProduct($request,$product);
+         Session::flash('message','product has been updaed');
+         return back();
+    }
+
+    public function store(Request $request){
+        //dd($request);
+        $request->validate([
+           'product_title'=>'required',
+           'product_description'=>'required',
+           'product_category'=>'required',
+           'product_unit'=>'required',
+           'product_price'=>'required',
+           'product_discount'=>'required',
+           'product_total'=>'required',
+
+        ]);
+
+
+
+        $product=new Product();
+        $this->writeProduct($request,$product);
+        Session::flash('message','product has been added');
         return redirect(route('products'));
   }
 }
