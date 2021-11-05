@@ -137,8 +137,8 @@
                                                 @else
                                                 <a href="" class="remove-image-upload" style="display: none"><i class="fas fa-minus-circle"></i></a>
                                                 @endif
-
-
+                                            @else
+                                            <a href="" class="remove-image-upload" style="display: none"><i class="fas fa-minus-circle"></i></a>
 
                                             @endif
                                             {{-- <a href="" class="remove-image-upload"><i class="fas fa-minus-circle"></i></a> --}}
@@ -253,9 +253,9 @@
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
-        <div class="modal-body row">
+        {{-- <div class="modal-body row">
 
-        </div>
+        </div> --}}
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
         <a href="#" class="delete-image-btn btn btn-primary" >DELETE IMAGE</a>
@@ -432,14 +432,12 @@
                resretUploadFile(fileUploadId,'i'+fileUploadId,$('#'+removeID).find('i'),ed);
 
                $.ajax({
-               url:imageDeletUrl,
-               data:{
-                image_id:imageID
-               },
-               dataType:'json',
-               method:'post',
-
-
+                    url:imageDeletUrl,
+                    data:{
+                        image_id:imageID
+                    },
+                    dataType:'json',
+                    method:'post',
               });
 
               $imageWindow.modal('hide');
