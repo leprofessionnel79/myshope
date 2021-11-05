@@ -129,17 +129,21 @@
                                     <div class="col-md-4 col-sm-12 mb-4">
 
                                         <div class="card card-image-upload" >
-                                            @if (!is_null($product->images)&& count($product->images)>0)
+
+
+                                            @if (!is_null($product)&& !is_null($product->images)&& count($product->images)>0)
                                                 @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
-                                                <a href="" class="remove-image-upload" ><i class="fas fa-minus-circle"></i></a>
+                                                <a href="" class="remove-image-upload" data-imageid="{{$product->images[$i]->id}}" data-fileid="image-{{$i}}" data-removeimg="removeimg-{{$i}}"><i class="fas fa-minus-circle"></i></a>
                                                 @else
                                                 <a href="" class="remove-image-upload" style="display: none"><i class="fas fa-minus-circle"></i></a>
                                                 @endif
 
+
+
                                             @endif
                                             {{-- <a href="" class="remove-image-upload"><i class="fas fa-minus-circle"></i></a> --}}
-                                            <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}">
-                                                @if (!is_null($product->images)&& count($product->images)>0)
+                                            <a href="#" class="activate-image-upload" data-fileid="image-{{$i}}" id="removeimg-{{$i}}">
+                                                @if (!is_null($product)&& !is_null($product->images)&& count($product->images)>0)
                                                   @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
                                                   <img id="{{'iimage-'.$i}}" src="{{asset($product->images[$i]->url)}}" class="card-img-top">
 
@@ -147,19 +151,33 @@
 
                                                 @endif
                                                 <div class="card-body" style="text-align: center">
-                                                @if (!is_null($product->images)&& count($product->images)>0)
+                                                @if (!is_null($product)&& !is_null($product->images)&& count($product->images)>0)
                                                         @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
-
+                                                        <i style ="display: none;" class="fas fa-image"></i>
                                                         @else
                                                         <i class="fas fa-image"></i>
-
                                                         @endif
 
+                                                @else
+                                                  <i class="fas fa-image"></i>
                                                 @endif
 
                                                 </div>
                                             </a>
+                                            @if (!is_null($product)&& !is_null($product->images)&& count($product->images)>0)
+                                                  @if (isset($product->images[$i]) && !is_null($product->images[$i]) && !empty($product->images[$i]))
+                                                  <input name="product_images[]" type="file" class="form-control-file file-image-upload" id="image-{{$i}}" value="{{asset($product->images[$i]->url)}}">
+                                                  @else
+                                                  <input name="product_images[]" type="file" class="form-control-file file-image-upload" id="image-{{$i}}">
+
+                                                  @endif
+
+                                            @else
                                             <input name="product_images[]" type="file" class="form-control-file file-image-upload" id="image-{{$i}}">
+
+                                            @endif
+
+
                                         </div>
 
 
@@ -222,6 +240,33 @@
 
 </div>
 
+
+<div class="modal image_window" tabindex="-1" role="dialog" id="options_window">
+
+    <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+        <h5 class="modal-title">DELETE IMAGE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body row">
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        <a href="#" class="delete-image-btn btn btn-primary" >DELETE IMAGE</a>
+        </div>
+
+    </div>
+
+    </div>
+
+</div>
+
 @endsection
 
 
@@ -229,6 +274,10 @@
 
     <script>
     var optionNamesList = [];
+    </script>
+
+    <script>
+    var imageDeletUrl = '{{route('delete-image')}}';
     </script>
 
     @if (!is_null($product))
@@ -246,7 +295,13 @@
    <script>
       jQuery(document).ready(function(){
         //   alert('hi');
+        $.ajaxSetup({
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+               });
          var $optionWindow = $('#options_window');
+         var $imageWindow = $('.image_window');
          var $optionButton = $('#add-option');
 
          var optionNamesrow = '';
@@ -325,7 +380,10 @@
         function resretUploadFile(fileUploadId,imageID,$ei,$ed){
            $('#'+imageID).attr('src','');
            $ei.fadeIn();
-           $ed.fadeOut();
+           if($ed!=null){
+            $ed.fadeOut();
+           }
+
            $('#'+fileUploadId).val('');
         }
 
@@ -347,6 +405,44 @@
                  e.preventDefault();
                  resretUploadFile('#'+fileUploadId,'i'+fileUploadId,me.find('i'),$removeimage);
              });
+            });
+         });
+         $('.remove-image-upload').on('click',function(e){
+            e.preventDefault();
+            var me = $(this);
+            var imageID = me.data('imageid');
+            var fileUploadId=$(this).data('fileid');
+            var $removeimage=me.parent().find('.remove-image-upload');
+            var removeID = $(this).data('removeimg');
+
+            $('.delete-image-btn').data('ed',$removeimage);
+            $('.delete-image-btn').data('fileid',fileUploadId);
+            $('.delete-image-btn').data('removeimg',removeID);
+            $('.delete-image-btn').data('imageid',imageID);
+            $imageWindow.modal('show');
+
+
+
+            $(document).on('click','.delete-image-btn',function(e){
+               e.preventDefault();
+               var imageID = $(this).data('imageid');
+               var fileUploadId = $(this).data('fileid');
+               var removeID = $(this).data('removeimg');
+               var ed = $(this).data('ed');
+               resretUploadFile(fileUploadId,'i'+fileUploadId,$('#'+removeID).find('i'),ed);
+
+               $.ajax({
+               url:imageDeletUrl,
+               data:{
+                image_id:imageID
+               },
+               dataType:'json',
+               method:'post',
+
+
+              });
+
+              $imageWindow.modal('hide');
             });
          });
       });

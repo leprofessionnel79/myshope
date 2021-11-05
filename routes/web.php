@@ -70,6 +70,7 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
 
     Route::get('new-product','ProductController@newProduct')->name('new-product');
     Route::post('new-product','ProductController@store');
+    Route::post('delete-image','ProductController@deleteImage')->name('delete-image');
 
     Route::get('new-product/{id?}','ProductController@newProduct')->name('new-product');
     Route::put('update-product','ProductController@update')->name('update-product');

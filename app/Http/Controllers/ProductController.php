@@ -55,7 +55,7 @@ class ProductController extends Controller
         ]);
     }
 
-    private function writeProduct(Request $request,Product $product){
+    private function writeProduct(Request $request,Product $product,$update=false){
 
         $product->title=$request->input('product_title');
         $product->description=$request->input('product_description');
@@ -86,6 +86,7 @@ class ProductController extends Controller
         $product->save();
 
         if($request->hasFile('product_images')){
+
             $images= $request->file('product_images');
             foreach($images as $image){
                 $filename = time().'-'.$image->getClientOriginalName();
@@ -131,9 +132,9 @@ class ProductController extends Controller
 
          $productID = $request->input("prduct_id");
          $product=Product::find($productID);
-        
-         $this->writeProduct($request,$product);
-         Session::flash('message','product has been updaed');
+
+         $this->writeProduct($request,$product,true);
+         Session::flash('message','product has been updated');
          return back();
     }
 
@@ -156,5 +157,10 @@ class ProductController extends Controller
         $this->writeProduct($request,$product);
         Session::flash('message','product has been added');
         return redirect(route('products'));
+  }
+
+  public function deleteImage(Request $request){
+      $imgID= $request->input("image_id");
+      Image::destroy($imgID);
   }
 }
