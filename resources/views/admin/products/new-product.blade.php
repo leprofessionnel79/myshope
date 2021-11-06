@@ -253,9 +253,11 @@
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
-        {{-- <div class="modal-body row">
+        <div class="modal-body ">
 
-        </div> --}}
+            <p> Are you sure you want delete this image ?</p>
+
+        </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
         <a href="#" class="delete-image-btn btn btn-primary" >DELETE IMAGE</a>

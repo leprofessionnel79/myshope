@@ -52,7 +52,22 @@
                   @endforeach
                   </div>
 
-                  {{$products->links()}}
+                  {{-- {{$products->links()}} --}}
+
+                  {{ (!is_null($showLinks) && $showLinks) ? $products->links():'' }}
+
+                <form action="{{route('product-search')}}" method="post">
+                    @csrf
+                    <div class="row">
+
+                            <div class="form-group col-md-6" >
+                                <input type="text" class="form-control" id="search_product" name="search_product" placeholder="Search By Products name or price" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+                    </div>
+                </form>
 
 
                 </div>

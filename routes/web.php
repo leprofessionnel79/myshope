@@ -75,6 +75,7 @@ Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
     Route::get('new-product/{id?}','ProductController@newProduct')->name('new-product');
     Route::put('update-product','ProductController@update')->name('update-product');
     Route::delete('products','ProductController@delete');
+    Route::post('product-search','ProductController@search')->name('product-search');
 
 
 

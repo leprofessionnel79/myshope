@@ -17,7 +17,36 @@ class ProductController extends Controller
         return view('admin.products.products')->with([
             'products'=>$products,
             'currency'=>$currency,
+            'showLinks'=>true,
         ]);
+
+    }
+
+    public function search(Request $request){
+        $request->validate([
+            'search_product'=>'required'
+        ]);
+
+        $searchTerms = $request->input('search_product');
+
+        $products = Product::where('title','LIKE','%'.$searchTerms.'%')->
+        orwhere('price','LIKE','%'.$searchTerms.'%')->get();
+
+        if (count($products)==0){
+            return redirect()->back()->with([
+                'message'=>'product dosnt exist'
+            ]);
+        }
+
+        if (count($products)>0){
+            $currency=env('SHOP_CURRENCY',"$");
+            return view('admin.products.products')->with([
+                'products'=>$products,
+                'currency'=>$currency,
+                'showLinks'=>false,
+            ]);
+        }
+
 
     }
 
