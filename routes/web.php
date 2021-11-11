@@ -49,8 +49,8 @@ Route::get('test', function () {
     return 'hello';
 })->middleware(['auth','User_Is_Admin']);
 
-Route::middleware(['auth', 'User_Is_Admin'])->group(function () {
-
+Route::middleware(['auth','User_Is_Admin'])->group(function () {
+     //
     // units
 
     Route::get('add_unit','UnitController@showAdd')->name('new-unit');

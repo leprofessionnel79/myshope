@@ -69,6 +69,8 @@
 
 
 
+
+
     <div class="toast" style="position: absolute; top: 10%; right: 10%;">
       <div class="toast-header">
 
@@ -86,33 +88,37 @@
     </div>
 
 
+
+
 @endsection
 
-  <div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Delete Tag</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    <form action="{{route('tags')}}" method="post">
-            <div class="modal-body">
-            <p id="delete-message"></p>
+    <div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Delete Tag</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        <form action="{{route('tags')}}" method="post">
+                <div class="modal-body">
+                <p id="delete-message"></p>
 
-                @csrf
-                <input type="hidden" value="delete" name="_method">
-                <input type="hidden"  name="tag_id" value="" id="tag_id">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-            <button type="submit" class="btn btn-primary">DELETE</button>
-            </div>
-    </form>
-      </div>
+                    @csrf
+                    <input type="hidden" value="delete" name="_method">
+                    <input type="hidden"  name="tag_id" value="" id="tag_id">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                <button type="submit" class="btn btn-primary">DELETE</button>
+                </div>
+        </form>
+        </div>
+        </div>
     </div>
-  </div>
+
+  
 
 
   <div class="modal edit_window" tabindex="-1" role="dialog" id="edit-window">

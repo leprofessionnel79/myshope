@@ -73,20 +73,20 @@
 
                   {{ (!is_null($showLinks) && $showLinks) ? $units->links():'' }}
 
-                <form action="{{route('units-search')}}" method="get">
-                    @csrf
-                   <div class="row">
+                    <form action="{{route('units-search')}}" method="get">
+                        @csrf
+                    <div class="row">
 
-                          <div class="form-group col-md-6" >
-                            <input type="text" class="form-control" id="search_units" name="search_units" placeholder="Search Units" required>
-                          </div>
-                          <div class="form-group col-md-6">
-                              <button class="btn btn-primary" type="submit">Search</button>
-                          </div>
+                            <div class="form-group col-md-6" >
+                                <input type="text" class="form-control" id="search_units" name="search_units" placeholder="Search Units" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
 
 
-                  </div>
-                </form>
+                    </div>
+                    </form>
 
 
                 </div>

@@ -41,7 +41,7 @@
                             <a href="{{route('new-product',['id'=>$product->id])}}" class="btn btn-success mt-3">Update Product</a>
 
                             {{-- delete product  --}}
-                            <span><a href="#" class="delete_product" data-productid="{{$product->id}}"
+                            <span><a href="#" class="delete_product" data-productname="{{$product->title}}" data-productid="{{$product->id}}"
                                 ><i title="DELETE PRODUCT" class="far fa-trash-alt"></i></a></span>
 
 
@@ -56,18 +56,18 @@
 
                   {{ (!is_null($showLinks) && $showLinks) ? $products->links():'' }}
 
-                <form action="{{route('product-search')}}" method="post">
-                    @csrf
-                    <div class="row">
+                    <form action="{{route('product-search')}}" method="post">
+                        @csrf
+                        <div class="row">
 
-                            <div class="form-group col-md-6" >
-                                <input type="text" class="form-control" id="search_product" name="search_product" placeholder="Search By Products name or price" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <button class="btn btn-primary" type="submit">Search</button>
-                            </div>
-                    </div>
-                </form>
+                                <div class="form-group col-md-6" >
+                                    <input type="text" class="form-control" id="search_product" name="search_product" placeholder="Search By Products name or price" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                        </div>
+                    </form>
 
 
                 </div>
@@ -93,7 +93,12 @@
   </div>
 
 
-  <div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
+
+
+@endsection
+
+
+<div class="modal delete_window " tabindex="-1" role="dialog" id="delete-window">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -104,7 +109,7 @@
         </div>
     <form action="{{route('products')}}" method="post">
             <div class="modal-body">
-            <p id="delete-message"> are you sure you want delete this product ?</p>
+            <p id="delete-message"> </p>
 
                 @csrf
                 <input type="hidden" value="delete" name="_method">
@@ -118,8 +123,6 @@
       </div>
     </div>
   </div>
-
-@endsection
 
 @section('scripts')
 
@@ -148,14 +151,15 @@
          var $deleteProduct=$('.delete_product');
          var $deleteWindow=$('#delete-window');
          var $productId = $('#product_id');
+         var $deletemessage=$('#delete-message');
 
          $deleteProduct.on('click',function(element){
                  element.preventDefault();
              var product_id = $(this).data('productid');
-
+             var product_name =$(this).data('productname');
 
              $productId.val(product_id);
-             //$deletemessage.text('are you sure u want delete '+tag_tag+' ?');
+             $deletemessage.text('are you sure u want delete product '+product_name+' ?');
                  $deleteWindow.modal('show');
 
         });

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller
 {
     public function index(){
         $tags=Tag::paginate(env('NUMBER_OF_PAGES'));
+        $user=Auth::user();
         return view('admin.tags.tags')->with([
             'tags'=>$tags,
+            'user'=>$user,
             'showLinks'=>true,
         ]);
     }
