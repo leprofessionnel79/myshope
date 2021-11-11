@@ -64,11 +64,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        // return User::create([
+        //     'first_name' => $data['first_name'],
+        //     'last_name' => $data['last_name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
+
+        $user=new User();
+        $user->first_name=$data['first_name'];
+        $user->last_name=$data['last_name'];
+        $user->email=$data['email'];
+        $user->password=Hash::make($data['password']);
+
+        $user->api_token= bin2hex(openssl_random_pseudo_bytes(30));
+
+        $user->save();
+
+        return $user;
     }
 }
