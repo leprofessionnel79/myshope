@@ -94,7 +94,7 @@
 
     <div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
         <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content col-md-9">
             <div class="modal-header">
             <h5 class="modal-title">Delete Tag</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -118,14 +118,14 @@
         </div>
     </div>
 
-  
+
 
 
   <div class="modal edit_window" tabindex="-1" role="dialog" id="edit-window">
     <form action="{{route('tags')}}" method="post" >
         <div class="modal-dialog" role="document">
 
-        <div class="modal-content">
+        <div class="modal-content col-md-9">
 
             <div class="modal-header">
             <h5 class="modal-title">Update Tag</h5>
@@ -139,7 +139,7 @@
             <div class="modal-body">
 
                 @csrf
-                <div class="form-group col-md-6 " >
+                <div class="form-group col-md-6" >
                 <label for="edit_unit_name" >Tag Name</label>
                 <input type="text" class="form-control" id="edit_tag_tag" name="tag_tag" placeholder="Tag Name" required>
                 </div>

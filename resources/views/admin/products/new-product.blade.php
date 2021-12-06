@@ -379,7 +379,7 @@
             }
         }
 
-        function resretUploadFile(fileUploadId,imageID,$ei,$ed){
+        function resetUploadFile(fileUploadId,imageID,$ei,$ed){
            $('#'+imageID).attr('src','');
            $ei.fadeIn();
            if($ed!=null){
@@ -405,7 +405,7 @@
 
              $removeimage.on('click',function(e){
                  e.preventDefault();
-                 resretUploadFile('#'+fileUploadId,'i'+fileUploadId,me.find('i'),$removeimage);
+                 resetUploadFile('#'+fileUploadId,'i'+fileUploadId,me.find('i'),$removeimage);
              });
             });
          });
@@ -431,7 +431,7 @@
                var fileUploadId = $(this).data('fileid');
                var removeID = $(this).data('removeimg');
                var ed = $(this).data('ed');
-               resretUploadFile(fileUploadId,'i'+fileUploadId,$('#'+removeID).find('i'),ed);
+               resetUploadFile(fileUploadId,'i'+fileUploadId,$('#'+removeID).find('i'),ed);
 
                $.ajax({
                     url:imageDeletUrl,

@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/497760f0f8.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 
     <!-- Fonts -->

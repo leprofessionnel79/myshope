@@ -98,17 +98,17 @@
 @endsection
 
 
-<div class="modal delete_window " tabindex="-1" role="dialog" id="delete-window">
+<div class="modal delete_window" tabindex="-1" role="dialog" id="delete-window">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content col-md-10">
         <div class="modal-header">
           <h5 class="modal-title">Delete product</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-    <form action="{{route('products')}}" method="post">
-            <div class="modal-body">
+    <form action="{{route('products')}}" method="post" >
+            <div class="modal-body ">
             <p id="delete-message"> </p>
 
                 @csrf
